@@ -1,0 +1,11 @@
+ipdb
+joblib
+tqdm
+opencv-python==4.5.5.64
+yacs
+tabulate
+termcolor
+chumpy
+mediapipe
+func_timeout
+pyrender

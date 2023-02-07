@@ -1,0 +1,49 @@
+FROM nvcr.io/nvidia/pytorch:22.07-py3
+
+COPY requirements.txt /tmp/requirements.txt
+
+RUN if [ -f /etc/apt/sources.list.d/cuda.list ]; then \
+    rm /etc/apt/sources.list.d/cuda.list; \
+    fi \
+    && if [ -f /etc/apt/sources.list.d/nvidia-ml.list ]; then \
+    rm /etc/apt/sources.list.d/nvidia-ml.list; \
+    fi && \
+    sed -i "s@http://.*archive.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list && \
+    sed -i "s@http://.*security.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list && \
+    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# nvidia-container-runtime
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,graphics
+
+# Default pyopengl to EGL for good headless rendering support
+ENV PYOPENGL_PLATFORM egl
+
+COPY 10_nvidia.json /usr/share/glvnd/egl_vendor.d/10_nvidia.json
+
+RUN apt-get update -yq --fix-missing && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
+    pkg-config \
+    libglvnd0 \
+    libgl1 \
+    libglx0 \
+    libegl1 \
+    libgles2 \
+    libglvnd-dev \
+    libgl1-mesa-dev \
+    libegl1-mesa-dev \
+    libgles2-mesa-dev \
+    cmake \
+    curl \
+    git
+
+RUN pip install -r /tmp/requirements.txt
+
+ENV PYTHONPATH=.
+
+# After Install openpose at /workspace/openpose, every time we start a container, we need to run `ldconfig` to update the library path. Otherwise, torch will not work.
