@@ -17,7 +17,7 @@ lightstage-dense-smplh:
     exp: config/recon/triangulator-mv1p-total-mobilestage-studio.yml
     out: output-keypoints3d-lightstage
   fit: smplh-3d
-  output: output-smpl-3d-lightstage
+  output: output-smplh-3d-lightstage
 lightstage-dense-manol:
   triangulation:
     data: config/recon/mv1p.yml
@@ -87,6 +87,7 @@ mv1p:
     exp: config/recon/mv1p-total.yml
     out: output-keypoints3d
   fit: smpl-3d
+  output: output-smpl-3d
   evaluate: none
 mv1p-skel:
   triangulation:
@@ -104,6 +105,7 @@ mv1p-smplh:
     exp: config/recon/mv1p-total.yml
     out: output-keypoints3d
   fit: smplh-3d
+  output: output-smplh-3d
   evaluate: none
 mv1p-manol:
   extract_image: none
