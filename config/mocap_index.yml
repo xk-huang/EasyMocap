@@ -3,6 +3,11 @@ smpl-3d:
   data: config/data/mv1p.yml
   exp: config/fit/mv1p3d.yml
   model: config/model/smpl.yml
+smpl_male-3d:
+  comment: "Fitting SMPL male to 3D body keypoints"
+  data: config/data/mv1p.yml
+  exp: config/fit/mv1p3d.yml
+  model: config/model/smpl_male.yml
 # mirror
 mirror-smpl:
   comment: "Fitting SMPL to mirror"

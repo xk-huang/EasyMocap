@@ -13,6 +13,12 @@ if [[ $mode = 'smpl' ]]; then
         exit 0
     fi
     python3 apps/demo/mocap.py ${data} --work mv1p --subs_vis "$(ls ${data}/images | head -1)"
+elif [[ $mode = 'smpl_male' ]]; then
+    if [[ -f "${data}/output-smpl_male-3d/smplmesh.mp4" ]]; then
+        echo "Already processed: ${data}"
+        exit 0
+    fi
+    python3 apps/demo/mocap.py ${data} --work mv1p-smpl_male --subs_vis "$(ls ${data}/images | head -1)"
 elif [[ $mode == 'smplh' ]]; then
     if [[ -f "${data}/output-smplh-3d/smplmesh.mp4" ]]; then
         echo "Already processed: ${data}"

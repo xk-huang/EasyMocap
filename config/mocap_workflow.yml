@@ -89,6 +89,19 @@ mv1p:
   fit: smpl-3d
   output: output-smpl-3d
   evaluate: none
+mv1p-smpl_male:
+  extract_image: none
+  calibration: none
+  extract_keypoints:
+    hrnet: "apps/preprocess/extract_keypoints.py ${data} --mode yolo-hrnet"
+    openpose: "apps/preprocess/extract_keypoints.py ${data} --mode feetcrop --hand"
+  triangulation:
+    data: config/recon/mv1p.yml
+    exp: config/recon/mv1p-total.yml
+    out: output-keypoints3d
+  fit: smpl_male-3d
+  output: output-smpl_male-3d
+  evaluate: none
 mv1p-skel:
   triangulation:
     data: config/recon/mv1p.yml
