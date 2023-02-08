@@ -370,7 +370,7 @@ if __name__ == '__main__':
     parser.add_argument('--subs', type=str, default=None, nargs='+')
     parser.add_argument('--subs_vis', type=str, default=None, nargs='+')
     parser.add_argument('--mode', type=str, default='smpl-3d')
-    parser.add_argument('--exp', type=str, default='output-smpl-3d')
+    parser.add_argument('--exp', type=str, default='smpl-3d')
     parser.add_argument('--opt_data', type=str, default=[], nargs='+')
     parser.add_argument('--opt_exp', type=str, default=[], nargs='+')
     parser.add_argument('--debug', action='store_true')

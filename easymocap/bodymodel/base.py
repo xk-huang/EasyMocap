@@ -46,7 +46,10 @@ class Params(dict):
         return output
 
     def __len__(self):
-        return len(self['poses'])
+        try:
+            return len(self['poses'])
+        except KeyError:
+            return np.max([len(self[_key]) for _key in self.keys()])
     
     def __getattr__(self, name):
         if name in self:

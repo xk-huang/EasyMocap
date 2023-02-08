@@ -3,43 +3,43 @@ triangulation-dense:
   triangulation:
     data: config/recon/mv1p.yml
     exp: config/recon/triangulator-mv1p-total-mobilestage-studio.yml
-    out: output-keypoints3d
+    out: output-keypoints3d-lightstage
 lightstage-dense-smpl:
   triangulation:
     data: config/recon/mv1p.yml
     exp: config/recon/triangulator-mv1p-total-mobilestage-studio.yml
-    out: output-keypoints3d
+    out: output-keypoints3d-lightstage
   fit: smpl-3d
-  output: output-smpl-3d
+  output: output-smpl-3d-lightstage
 lightstage-dense-smplh:
   triangulation:
     data: config/recon/mv1p.yml
     exp: config/recon/triangulator-mv1p-total-mobilestage-studio.yml
-    out: output-keypoints3d
+    out: output-keypoints3d-lightstage
   fit: smplh-3d
-  output: output-smpl-3d
+  output: output-smpl-3d-lightstage
 lightstage-dense-manol:
   triangulation:
     data: config/recon/mv1p.yml
     exp: config/recon/triangulator-mv1p-total-mobilestage-studio.yml
-    out: output-keypoints3d
+    out: output-keypoints3d-lightstage
   fit: handl-3d
-  output: output-manol-3d
+  output: output-manol-3d-lightstage
 lightstage-dense-unsync:
   triangulation:
     data: config/recon/mv1p.yml
     exp: config/recon/triangulator-mv1p-total-mobilestage-studio.yml
-    out: output-keypoints3d
+    out: output-keypoints3d-lightstage
   fit: smplh-3d-unsync
-  output: output-smpl-3d-unsync
+  output: output-smpl-3d-unsync-lightstage
   evaluate: none
 lightstage-dense-smplh-unsync:
   triangulation:
     data: config/recon/mv1p.yml
     exp: config/recon/triangulator-mv1p-total-mobilestage-studio.yml
-    out: output-keypoints3d
+    out: output-keypoints3d-lightstage
   fit: smplh-3d-unsync
-  output: output-smpl-3d
+  output: output-smpl-3d-lightstage
   evaluate: none
 internet:
   calibration: "python3 apps/calibration/create_blank_camera.py ${data}"
