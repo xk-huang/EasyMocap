@@ -12,3 +12,4 @@ mv annots olds/
 mkdir images
 mv Camera* images
 
+exit 0
