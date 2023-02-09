@@ -33,7 +33,7 @@ class FileStorage(object):
             self._write('  rows: {}'.format(value.shape[0]))
             self._write('  cols: {}'.format(value.shape[1]))
             self._write('  dt: d')
-            self._write('  data: [{}]'.format(', '.join(['{:.3f}'.format(i) for i in value.reshape(-1)])))
+            self._write('  data: [{}]'.format(', '.join(['{:e}'.format(i) for i in value.reshape(-1)])))
         elif dt == 'list':
             self._write('{}:'.format(key))
             for elem in value:
@@ -96,6 +96,8 @@ def write_extri(extri_name, cameras):
     extri.write('names', camnames, 'list')
     for key_, val in cameras.items():
         key = key_.split('.')[0]
+        if 'Rvec' not in val.keys():
+            val['Rvec'] = cv2.Rodrigues(val['R'])[0]
         extri.write('R_{}'.format(key), val['Rvec'])
         extri.write('Rot_{}'.format(key), val['R'])
         extri.write('T_{}'.format(key), val['T'])
