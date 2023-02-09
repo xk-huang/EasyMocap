@@ -31,6 +31,12 @@ relink_dir() {
         mkdir -p "${target_dir}"
     fi
 
+    if [[ "${target_dir}" == "keypoints2d" ]]; then
+        middle="_keypoints"
+    else
+        middle=""
+    fi
+
     find olds/"${target_dir}" -maxdepth 1 -mindepth 1 -type d | sort | while iFS= read -r full_sub; do
         sub=$(basename "$full_sub")
         mkdir -p "${target_dir}"/"$sub"
@@ -40,10 +46,11 @@ relink_dir() {
         for file in $(ls "$full_sub" | sort); do
             # mv -i -- $sub/$file $sub/$(printf %06d cnt).jpg"$extension"
             extension="${file##*.}"
-            if [[ ! -f ./"${target_dir}"/"$sub"/$(printf %06d $cnt)."$extension" ]]; then
-                ln -s ../../"$full_sub"/"$file"  ./"${target_dir}"/"$sub"/$(printf %06d $cnt)."$extension"
+            target_path=./"${target_dir}"/"$sub"/$(printf %06d $cnt)"$middle"."$extension"
+            if [[ ! -f $target_path ]]; then
+                ln -s ../../"$full_sub"/"$file"  "$target_path"
             # else
-            #     md5_before=$(md5sum ./"${target_dir}"/"$sub"/$(printf %06d $cnt)."$extension" | awk '{print $1}')
+            #     md5_before=$(md5sum "$target_path" | awk '{print $1}')
             #     md5_after=$(md5sum "$full_sub"/"$file" | awk '{print $1}')
             #     if [[ $md5_before != $md5_after ]]; then
             #         echo "ERROR: md5sum of ${target_dir} before and after is not the same"
@@ -72,7 +79,9 @@ if [[ "$(basename ${data})" = "CoreView_313" ]] || [[ "$(basename ${data})" = "C
     echo $data is CoreView_313 or CoreView_315, the "extri.yml" and "intr.yml" are missing, the images, keypoints2d are not named after numbers
     relink_dir images
     relink_dir keypoints2d
-
+    if [[ -d keypoints2d ]] && [[ ! -d openpose ]]; then
+        ln -s keypoints2d openpose
+    fi
 fi
 
 exit 0
