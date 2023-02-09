@@ -24,7 +24,7 @@ def run_openpose(image_root, annot_root, config):
     os.makedirs(annot_root, exist_ok=True)
     pwd = os.getcwd()
     if os.name != 'nt':
-        cmd = './build/examples/openpose/openpose.bin --image_dir {} --write_json {} --display 0'.format(
+        cmd = './build/examples/openpose/openpose.bin --image_dir \'{}\' --write_json \'{}\' --display 0'.format(
             image_root, annot_root)
     else:
         cmd = 'bin\\OpenPoseDemo.exe --image_dir {} --write_json {} --display 0'.format(
