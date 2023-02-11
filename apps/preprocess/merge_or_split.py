@@ -28,7 +28,7 @@ def merge_directories(root, out):
         srcname = join(root, seq, 'images', sub, imgname)
         dstname = join(out, 'images', 'merge', '{}+{}+{}'.format(seq, sub, imgname))
         if not os.path.exists(dstname):
-            cmd = 'ln -s {} {}'.format(srcname, dstname)
+            cmd = 'ln -s \'{}\' \'{}\''.format(srcname, dstname)
             # run_cmd(cmd)
             shutil.copyfile(srcname, dstname)
     with open(join(out, 'log.txt'), 'w') as f:
