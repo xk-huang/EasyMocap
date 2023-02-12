@@ -110,7 +110,7 @@ def read_camera(intri_name, extri_name, cam_names=[]):
     intri = FileStorage(intri_name)
     extri = FileStorage(extri_name)
     cams, P = {}, {}
-    cam_names = intri.read('names', dt='list')
+    cam_names = extri.read('names', dt='list')
     for cam in cam_names:
         # 内参只读子码流的
         cams[cam] = {}

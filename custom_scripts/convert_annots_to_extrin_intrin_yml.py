@@ -6,17 +6,16 @@ import os.path as osp
 import numpy as np
 import cv2
 
-try:
-    from easymocap.mytools.camera_utils import write_extri, write_intri, read_camera
-except ImportError:
+if osp.basename(os.getcwd()) == "custom_scripts":
     os.chdir("../")
-    from easymocap.mytools.camera_utils import write_extri, write_intri, read_camera
+
+from easymocap.mytools.camera_utils import write_extri, write_intri, read_camera
 
 
 print(f"pwd: {os.getcwd()}")
 
 parser = argparse.ArgumentParser()
-parser.add_argument("base_dir", type=str, help="The base directory of the dataset.")
+parser.add_argument("--base_dir", type=str, help="The base directory of the dataset.")
 args = parser.parse_args()
 
 
@@ -62,7 +61,7 @@ for camera_id in range(num_cameras):
     camera = {}
     # "K", "T", "R", "D"
     camera["K"] = annots_cameras["K"][camera_id]
-    camera["T"] = annots_cameras["T"][camera_id] / 1000.  # Get back
+    camera["T"] = annots_cameras["T"][camera_id] / 1000.  # # [XXX] The T is measured in mm in NeuralBody. Convert it to m.
     camera["R"] = annots_cameras["R"][camera_id]
     camera["dist"] = annots_cameras["D"][camera_id].reshape(1, 5)
     camera["Rvec"] = cv2.Rodrigues(annots_cameras["R"][camera_id])[0]
