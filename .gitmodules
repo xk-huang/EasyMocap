@@ -1,0 +1,3 @@
+[submodule "3rdparty/Self-Correction-Human-Parsing"]
+	path = 3rdparty/Self-Correction-Human-Parsing
+	url = git@github.com:xk-huang/Self-Correction-Human-Parsing.git
