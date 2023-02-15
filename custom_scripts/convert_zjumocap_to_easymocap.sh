@@ -2,7 +2,7 @@
 
 data=$1
 
-cd ${data}
+cd ${data} || return
 mkdir -p olds
 mv annots_python2.npy annots.npy match_info.json *.mp4 *.py *.npy annots.json olds/
 
@@ -79,6 +79,10 @@ if [[ "$(basename ${data})" = "CoreView_313" ]] || [[ "$(basename ${data})" = "C
     echo $data is CoreView_313 or CoreView_315, the "extri.yml" and "intr.yml" are missing, the images, keypoints2d are not named after numbers
     relink_dir images
     relink_dir keypoints2d
+
+    mv mask_cihp olds/
+    relink_dir mask_cihp
+
     if [[ -d keypoints2d ]] && [[ ! -d openpose ]]; then
         ln -s keypoints2d openpose
     fi
