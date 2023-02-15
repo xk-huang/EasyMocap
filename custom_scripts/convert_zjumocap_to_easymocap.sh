@@ -4,15 +4,15 @@ data=$1
 
 cd ${data} || return
 mkdir -p olds
-mv annots_python2.npy annots.npy match_info.json *.mp4 *.py *.npy annots.json olds/
+mv -i annots_python2.npy annots.npy match_info.json *.mp4 *.py *.npy annots.json olds/
 
 if [[ -d keypoints2d ]] && [[ ! -d openpose ]]; then
     ln -s keypoints2d openpose
 fi
-mv annots olds/
+mv -i annots olds/
 
 mkdir images
-mv Camera* images
+mv -i Camera* images
 
 # Special case for CoreView_313 and CoreView_315
 
@@ -80,7 +80,7 @@ if [[ "$(basename ${data})" = "CoreView_313" ]] || [[ "$(basename ${data})" = "C
     relink_dir images
     relink_dir keypoints2d
 
-    mv mask_cihp olds/
+    mv -i mask_cihp olds/
     relink_dir mask_cihp
 
     if [[ -d keypoints2d ]] && [[ ! -d openpose ]]; then
